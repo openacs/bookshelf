@@ -21,7 +21,7 @@ create table bookshelf_books (
   main_entry             text,
   main_entry_mime_type   varchar(200) default 'text/plain'
                          constraint bkshlf_book_main_mime_type_fk
-                         references cr_mime_types;  
+                         references cr_mime_types,
   additional_entry       text,
   additional_entry_mime_type 
                          varchar(200) default 'text/plain'
