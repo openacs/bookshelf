@@ -13,8 +13,10 @@
         <database>postgresql</database>
     </database-support>
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
-        <summary>Allows you to share your bookshelf with others.</summary>
+        <summary>Share your bookshelf with others.</summary>
+        <description format="text/html">Store commentary on books with an interface to amazon to retrieve thumbnails and other book data</description>
 
+        
         <!-- No dependency information -->
 
         <files>
