@@ -8,21 +8,18 @@
     <singleton-p>f</singleton-p>
 
     <version name="0.4d2" url="http://openacs.org/repository/download/apm/bookshelf-0.4d2.apm">
-    <database-support>
-        <database>oracle</database>
-        <database>postgresql</database>
-    </database-support>
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Share your bookshelf with others.</summary>
+        <release-date>2004-05-20</release-date>
         <description format="text/html">Store commentary on books with an interface to amazon to retrieve thumbnails and other book data</description>
 
+        <provides url="bookshelf" version="0.4d2"/>
         <requires url="acs-kernel" version="5.2.0d2"/>
         <callbacks>
             <callback type="after-install"  proc="bookshelf::install::package_install"/>
             <callback type="before-uninstall"  proc="bookshelf::install::package_uninstall"/>
             <callback type="before-upgrade"  proc="bookshelf::install::package_upgrade"/>
         </callbacks>
-
         <parameters>
         <!-- No version parameters -->
         </parameters>

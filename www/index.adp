@@ -55,7 +55,8 @@
               <a href="@book.view_url@" title="View book review">@book.book_title@</a>
               <if @write_p@ true>(<a href="@book.edit_url@">Edit</a>)</if>
               <br>
-              <if @book.excerpt@ not nil>@book.excerpt@<br></if>
+              <if @book.main_entry@ not nil>@book.main_entry_html;noquote@<br /></if>
+              <if @book.additional_entry@ not nil><a href="@book.view_url@">Continued...</a><br /></if>
               <font color="#6f6f6f">Reviewed by:</font> @book.creation_user_first_names@ @book.creation_user_last_name@
               <br>
               <font color="#6f6f6f">Read Status:</font>

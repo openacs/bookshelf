@@ -28,6 +28,7 @@
 <if @displayed_object_id@ not nil><property name="displayed_object_id">@displayed_object_id@</property></if>
 <if @focus@ not nil><property name="focus">@focus;noquote@</property></if>
 <if @context_bar@ not nil><property name="context_bar">@context_bar;noquote@</property></if>
+<if @context@ not nil><property name="context">@context;noquote@</property></if>
 
 <include src="nav-bar">
 

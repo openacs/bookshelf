@@ -22,8 +22,7 @@ if { ![empty_string_p $book(isbn)] } {
     set book(image_height) {}
 }
 
-set perma_url "[ad_url][ad_conn package_url]book-view?[export_vars { book_no }]"
-set google_url "http://www.google.com/search?[export_vars { {q $book(book_title) } }]"
+set perma_url "book-view?[export_vars { book_no }]"
 
 if { $write_p } {
     set edit_url "book-edit?[export_vars { book_no }]"
