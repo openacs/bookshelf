@@ -10,9 +10,9 @@
   .bookshelf_summary_bold { font-size: 70%; font-family: verdana,arial,helvetica; font-weight: bold; }
   </style>
 </property>
-<if @signatory;noquote@ not nil><property name="signatory">@signatory</property></if>
-<if @focus;noquote@ not nil><property name="focus">@focus;noquote@</property></if>
-<if @context_bar;noquote@ not nil><property name="context_bar">@context_bar;noquote@</property></if>
+<if @signatory@ not nil><property name="signatory">@signatory</property></if>
+<if @focus@ not nil><property name="focus">@focus;noquote@</property></if>
+<if @context_bar@ not nil><property name="context_bar">@context_bar;noquote@</property></if>
 
 <include src="nav-bar">
 
