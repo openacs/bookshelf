@@ -7,7 +7,7 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
 
-    <version name="0.2" url="http://openacs.org/repository/download/apm/bookshelf-0.2.apm">
+    <version name="0.3" url="http://openacs.org/repository/download/apm/bookshelf-0.3.apm">
     <database-support>
         <database>oracle</database>
         <database>postgresql</database>
@@ -16,8 +16,7 @@
         <summary>Share your bookshelf with others.</summary>
         <description format="text/html">Store commentary on books with an interface to amazon to retrieve thumbnails and other book data</description>
 
-        
-        <!-- No dependency information -->
+        <requires url="acs-kernel" version="5.2.0d2"/>
 
         <files>
             <file type="package_spec" path="bookshelf.info"/>

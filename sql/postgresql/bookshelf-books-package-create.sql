@@ -9,7 +9,7 @@
 
 select define_function_args ('bookshelf_book__new', 'book_id,object_type;bookshelf_book,package_id,isbn,book_author,book_title,main_entry,additional_entry,excerpt,publish_status,read_status,creation_date,creation_user,creation_ip,context_id');
 
-create function bookshelf_book__new (
+create or replace function bookshelf_book__new (
   integer, -- book_id
   varchar, -- object_type
   integer, -- package_id
@@ -59,7 +59,10 @@ begin
         v_creation_date,
         p_creation_user,
         p_creation_ip,
-        coalesce(p_context_id, p_package_id)
+        coalesce(p_context_id, p_package_id),
+        ''t'',
+        p_book_title,
+        p_package_id
     );
 
     select coalesce(max(book_no),0) + 1
@@ -84,7 +87,7 @@ end;
 
 select define_function_args ('bookshelf_book__delete', 'message_id');
 
-create function bookshelf_book__delete (integer)
+create or replace function bookshelf_book__delete (integer)
 returns integer as '
 declare
     p_book_id                    alias for $1;    
@@ -100,7 +103,7 @@ end;
 
 select define_function_args('bookshelf_book__name','book_id');
 
-create function bookshelf_book__name (integer)
+create or replace function bookshelf_book__name (integer)
 returns varchar as '
 declare
     p_book_id                    alias for $1;
@@ -112,7 +115,7 @@ end;
 
 
 
-create function bookshelf_book__read_status_sort_order(
+create or replace function bookshelf_book__read_status_sort_order(
     varchar                     -- read_status
 ) returns integer
 as '
@@ -134,7 +137,7 @@ end;
 
 
 
-create function bookshelf_book__read_status_pretty(
+create or replace function bookshelf_book__read_status_pretty(
     varchar                     -- read_status
 ) returns varchar
 as '
@@ -155,7 +158,7 @@ end;
 
 
 
-create function bookshelf_book__pub_status_sort_order(
+create or replace function bookshelf_book__pub_status_sort_order(
     varchar                     -- publish_status
 ) returns integer
 as '
@@ -176,7 +179,7 @@ end;
 
 
 
-create function bookshelf_book__pub_status_pretty(
+create or replace function bookshelf_book__pub_status_pretty(
     varchar                     -- publish_status
 ) returns varchar
 as '
