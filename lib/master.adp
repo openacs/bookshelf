@@ -2,9 +2,23 @@
 <property name="title">@title;noquote@</property>
 <property name="header_stuff">
   <style>
-  .bookshelf_navbar { font-family: tahoma,verdana,arial,helvetica; font-size: 70%; font-weight: bold; color: #ccccff; text-decoration: none; }
-  A.bookshelf_navbar { color: white; }
-  .bookshelf_navbar:hover { color: white; text-decoration: underline;  }
+  div.bookshelf_navbar { 
+      text-align: right;
+      font-size: 80%;
+      font-weight: bold;
+      background: #41329c; 
+      padding: 3px 1em 3px 0;
+      color: white;
+  }
+  .bookshelf_navbar a:link,
+  .bookshelf_navbar a:visited {
+      color: white; 
+      text-decoration: none;
+  }
+  .bookshelf_navbar a:hover { 
+      color: white; 
+      text-decoration: underline; 
+  }
   INPUT.bookshelf_navbar { font-family: tahoma,verdana,arial,helvetica; font-weight: bold; font-size: 70%; color: black; }
   .bookshelf_summary { font-size: 70%; font-family: verdana,arial,helvetica; }
   .bookshelf_summary_bold { font-size: 70%; font-family: verdana,arial,helvetica; font-weight: bold; }
