@@ -19,4 +19,3 @@ set page_title "One Book"
 set context_bar [ad_context_bar $page_title]
 
 bookshelf::book::get -book_no $book_no -array book
-
