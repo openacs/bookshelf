@@ -88,7 +88,7 @@ namespace eval bookshelf::amazon {
 
         set amazon_info_page [ns_httpget $url]
 
-        if { ![regexp {<title>\s*Amazon.com: buying info: ([^<]*)\s*</title>} $amazon_info_page match title] } {
+        if { ![regexp {<title>\s*Amazon.com: [^:]+: ([^<]*)\s*</title>} $amazon_info_page match title] } {
             set row(book_title) "-"
         } else {
             set row(book_title) [string trim $title]
