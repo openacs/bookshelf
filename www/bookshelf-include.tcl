@@ -5,11 +5,19 @@
 # Expects:
 #   package_id:optional
 
+# optional: limit (sets a limit to how many are shown)
+
 if { ![exists_and_not_null package_id] } {
     set package_id [ad_conn package_id]
 }
 
-db_multirow -extend { view_url } book books {
+if { [exists_and_not_null limit] } {
+    set limit_clause "limit $limit"
+} else {
+    set limit_clause ""
+}
+
+db_multirow -extend { view_url } book books "
     select b.book_id,
            b.book_no,
            b.isbn,
@@ -28,11 +36,12 @@ db_multirow -extend { view_url } book books {
            u.last_name as creation_user_last_name
     from   bookshelf_books b join 
            acs_objects o on (o.object_id = b.book_id) join
-           cc_users u on (u.user_id = o.creation_user)
+           persons u on (u.person_id = o.creation_user)
     where  package_id = :package_id
     and    publish_status = 'publish'
     order  by bookshelf_book__read_status_sort_order(b.read_status) desc, o.creation_date desc
-} {
+    $limit_clause
+" {
     if { [empty_string_p $excerpt] } {
         set excerpt [string_truncate -len 300 -- $main_entry]
     }
