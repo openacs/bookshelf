@@ -70,6 +70,11 @@ namespace eval bookshelf::book {
                        read_status = :read_status
                 where  book_id = :book_id
             }
+            db_dml update_obj_title_by_id {
+                update acs_objects
+                set    title = :book_title
+                where  object_id = :book_id
+            }
         } else {
             if { ![exists_and_not_null book_no]} {
                 error "You must supply either book_id or book_no"
@@ -90,6 +95,16 @@ namespace eval bookshelf::book {
                 where  book_no = :book_no
                 and    package_id = :package_id
             }
+            db_dml update_obj_title_by_no {
+                update acs_objects
+                set    title = :book_title
+                where  object_id = (
+                  select book_id 
+                  from bookshelf_books
+                   where book_no = :book_no
+                     and package_id = :package_id)
+            }
+
         }
 
     }
