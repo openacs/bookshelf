@@ -26,7 +26,7 @@ create table bookshelf_books (
   additional_entry_mime_type 
                          varchar(200) default 'text/plain'
                          constraint book_additional_mime_type_fk
-                         references cr_mime_types;
+                         references cr_mime_types,
   excerpt                text,
   publish_status         varchar(50) not null
                          constraint bookshelf_book_publish_ck
