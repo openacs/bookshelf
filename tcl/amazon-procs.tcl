@@ -48,6 +48,7 @@ namespace eval bookshelf::amazon {
         close $writefd
         
         set tmpfilefd [open $filename w]
+        fconfigure $tmpfilefd -translation binary 
         
         fcopy $readfd $tmpfilefd
         

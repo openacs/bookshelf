@@ -78,10 +78,13 @@ ad_form -name book -form {
 
     ad_returnredirect "."
     return
+} -on_submit {
+    set isbn [string trim $isbn]
 }
 
 
 form get_values book isbn __isbn_update_flag
+set isbn [string trim $isbn]
 if { $__isbn_update_flag && [exists_and_not_null isbn] } {
     set image_url [bookshelf::amazon::get_image_url $isbn]
     set book_url [bookshelf::amazon::get_book_url $isbn]
