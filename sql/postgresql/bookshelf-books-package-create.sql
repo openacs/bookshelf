@@ -32,8 +32,8 @@ declare
     p_object_type                   alias for $2;
     p_package_id                    alias for $3;
     p_isbn                          alias for $4;
-    p_book_title                    alias for $5;
-    p_book_author                   alias for $6;
+    p_book_author                   alias for $5;
+    p_book_title                    alias for $6;
     p_main_entry                    alias for $7;
     p_additional_entry              alias for $8;
     p_excerpt                       alias for $9;
