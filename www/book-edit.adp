@@ -16,5 +16,5 @@
 </if>
 
 
-<formtemplate id="book" style="standard-lars"></formtemplate>
+<formtemplate id="book"></formtemplate>
 
