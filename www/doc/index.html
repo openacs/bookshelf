@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>Bookshelf Documentation</title>
+</head>
+<body>
+<h2>Bookshelf Documentation</h2>
+By <a href="http://www.pinds.com/">Lars Pind</a>.
+<hr>
+
+<h3>Why</h3>
+
+<p>
+  I wrote this bookshelf package for my own web site at <a
+  href="http://www.pinds.com/">pinds.com</a>. For background
+  information, please visit <a
+  href="http://www.pinds.com/download/">http://www.pinds.com/download</a>.
+</p>
+
+<h3>Download</h3>
+
+<p>
+  The latest version lives in the <a
+  href="http://openacs.org">OpenACS</a> CVS repository.
+</p>
+
+<h3>Getting started</h3>
+
+<p>
+  Install the package on your system, mount a new instance somewhere
+  on the site map, make sure you have admin permission on the
+  instance, and then visit the URL where you mounted it. Now you can
+  add your first book.
+</p>
+
+<p>
+  It's meant to support both single-user publish-to-the-world style
+  bookshelf, and a collaboratively maintained bookshelf for members of
+  a community.
+</p>
+
+<h3>Putting it on some other page</h3>
+
+<p>
+  If you want to inlcude your bookshelf on, say, your blog page, you
+  can get it in two versions:
+</p>
+
+<ul>
+  <li>
+    &lt;include src="/packages/bookshelf/www/bookshelf-include"&gt;
+    gives you the full version with reviews and all.
+  </li>
+  <li>
+    &lt;include
+    src="/packages/bookshelf/www/bookshelf-titles-include"&gt; gives
+    you the short version which just lists the titles.
+  </li>
+</ul>
+
+
+<h3>Technical Info</h3>
+
+<p>
+  The package fully supports multiple instances, i.e., you can mount
+  several instances in your site map, and they'll stay properly
+  isolated from each other.
+</p>
+
+<p>
+  Only supports PostgreSQL (please do port to Oracle if you want to).
+</p>
+
+
+<h3>Road Map</h3>
+
+<ul>
+
+  <li>Adding categories</li>
+
+  <li>Adding notifications</li>
+  
+  <li>Adding a calendar widget, perhaps</li>
+  
+  <li>
+    Technical detail: Refactoring some of the common features between this
+    package and bug-tracker and lars-blogger into a common, reusable
+    substrate
+  </li>
+
+</ul>
+
+<h3>Version History</h3>
+
+<ul>
+  <li>0.2: First released version.</li>
+</ul>
+
+<h3>License</h3>
+
+Released under the <a href="http://www.gnu.org/licenses/gpl.txt">GPL</a>.
+
+
+<hr>
+<a href="mailto:lars@pinds.com"><address>lars@pinds.com</address></a>
+</body>
+</html>
