@@ -8,7 +8,7 @@ ad_page_contract {
     book_no:integer,optional
 } -properties {
     page_title
-    context_bar
+    context
     image_url
     book_url
 }
@@ -28,7 +28,11 @@ if { [info exists book_no] } {
     set image_url ""
 }
 
-set context_bar [ad_context_bar $page_title]
+set context [list $page_title]
+
+if { ![ad_form_new_p -key book_no] } {
+    set delete_url [export_vars -base book-delete { book_no }]
+}
 
 ad_form -name book -form {
     book_id:key(acs_object_id_seq)
@@ -36,47 +40,50 @@ ad_form -name book -form {
     {__isbn_update_flag:integer(hidden) {value 0}}
     {book_author:text {label "Author"} {html { size 50 }} optional }
     {book_title:text {label "Title"} {html { size 50 }} }
-    {main_entry:text(textarea) {label "Main entry"} {html { rows 10 cols 60 }} optional }
-    {additional_entry:text(textarea) {label "Additional entry"} {html { rows 10 cols 60 }} optional }
-    {excerpt:text(textarea) {label "Excerpt"} {html { rows 5 cols 60 }} optional }
+    {main_entry:richtext(richtext) {label "Main entry"} {html { rows 10 cols 60 }} optional }
+    {additional_entry:richtext(richtext) {label "Additional entry"} {html { rows 10 cols 60 }} optional }
     {publish_status:text(select) {label "Publish status"} {options { { "Draft" draft } { "Publish" publish } } } }
     {read_status:text(select) {label "Read status"} {options { { "In the queue" queue } { "In hand" hand } { "On shelf" shelf } } } }
 } -edit_request {
     bookshelf::book::get -book_id $book_id -array book
-    unset book(creation_date)
-    unset book(creation_date_pretty)
-    unset book(creation_user)
-    unset book(creation_user_first_names)
-    unset book(creation_user_last_name)
-    unset book(book_no)
-    form set_values book book
+
+    foreach var { book_id isbn book_author book_title publish_status read_status } {
+        set $var $book($var)
+    }
+    
+    set main_entry [template::util::richtext::create $book(main_entry) $book(main_entry_mime_type)]
+    set additional_entry [template::util::richtext::create $book(additional_entry) $book(additional_entry_mime_type)]
+
+    
 } -new_data {
     bookshelf::book::new \
-            -book_id $book_id \
-            -isbn $isbn \
-            -book_author $book_author \
-            -book_title $book_title \
-            -main_entry $main_entry \
-            -additional_entry $additional_entry \
-            -excerpt $excerpt \
-            -publish_status $publish_status \
-            -read_status $read_status
+        -book_id $book_id \
+        -isbn $isbn \
+        -book_author $book_author \
+        -book_title $book_title \
+        -main_entry [template::util::richtext::get_property text $main_entry] \
+        -main_entry_mime_type [template::util::richtext::get_property mime_type $main_entry] \
+        -additional_entry [template::util::richtext::get_property text $additional_entry] \
+        -additional_entry_mime_type [template::util::richtext::get_property mime_type $additional_entry] \
+        -publish_status $publish_status \
+        -read_status $read_status
 
-    ad_returnredirect "."
+    ad_returnredirect -message "Your review of \"$book_title\" has been created." "."
     return
 } -edit_data {
     bookshelf::book::edit \
-            -book_id $book_id \
-            -isbn $isbn \
-            -book_author $book_author \
-            -book_title $book_title \
-            -main_entry $main_entry \
-            -additional_entry $additional_entry \
-            -excerpt $excerpt \
-            -publish_status $publish_status \
-            -read_status $read_status
+        -book_id $book_id \
+        -isbn $isbn \
+        -book_author $book_author \
+        -book_title $book_title \
+        -main_entry [template::util::richtext::get_property text $main_entry] \
+        -main_entry_mime_type [template::util::richtext::get_property mime_type $main_entry] \
+        -additional_entry [template::util::richtext::get_property text $additional_entry] \
+        -additional_entry_mime_type [template::util::richtext::get_property mime_type $additional_entry] \
+        -publish_status $publish_status \
+        -read_status $read_status
 
-    ad_returnredirect "."
+    ad_returnredirect -message "Your review of \"$book_title\" has been modified." "."
     return
 } -on_submit {
     set isbn [string trim $isbn]

@@ -78,8 +78,8 @@ set sql "
            b.book_author,
            b.book_title,
            b.main_entry,
+           b.main_entry_mime_type,
            b.additional_entry,
-           b.excerpt,
            b.publish_status,
            b.read_status,
            bookshelf_book__read_status_pretty(b.read_status) as read_status_pretty,
@@ -95,13 +95,11 @@ set sql "
     order  by o.creation_date desc
 "
 
-db_multirow -extend { view_url edit_url } book books $sql {
-    if { [empty_string_p $excerpt] } {
-        set excerpt [string_truncate -len 300 -- $main_entry]
-    }
+db_multirow -extend { view_url edit_url main_entry_html } book books $sql {
     set read_status_pretty [string totitle $read_status_pretty]
     set view_url "book-view?[export_vars { book_no }]"
     set edit_url "book-edit?[export_vars { book_no }]"
+    set main_entry_html [ad_html_text_convert -from $main_entry_mime_type -to text/html -- $main_entry]
 }
 
 db_multirow -extend { name_url stat_name } stats stats_by_read_status {

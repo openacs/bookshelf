@@ -19,7 +19,14 @@ create table bookshelf_books (
   book_author            text,
   book_title             text not null,
   main_entry             text,
+  main_entry_mime_type   varchar(200) default 'text/plain'
+                         constraint bkshlf_book_main_mime_type_fk
+                         references cr_mime_types;  
   additional_entry       text,
+  additional_entry_mime_type 
+                         varchar(200) default 'text/plain'
+                         constraint book_additional_mime_type_fk
+                         references cr_mime_types;
   excerpt                text,
   publish_status         varchar(50) not null
                          constraint bookshelf_book_publish_ck

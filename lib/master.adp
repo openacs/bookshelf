@@ -13,6 +13,7 @@
 <if @signatory@ not nil><property name="signatory">@signatory</property></if>
 <if @focus@ not nil><property name="focus">@focus;noquote@</property></if>
 <if @context_bar@ not nil><property name="context_bar">@context_bar;noquote@</property></if>
+<if @context@ not nil><property name="context">@context;noquote@</property></if>
 
 <include src="nav-bar">
 
