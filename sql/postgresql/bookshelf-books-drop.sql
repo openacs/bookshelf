@@ -9,6 +9,7 @@
 
 drop view bookshelf_books_published;
 drop table bookshelf_books;
+delete from acs_objects where object_type = 'bookshelf_book';
 
 create function inline_0 ()
 returns integer as '
