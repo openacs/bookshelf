@@ -20,8 +20,9 @@ if { [ad_permission_p $package_id create] } {
 if { [ad_conn user_id] != 0 } {
     multirow append links "My Books" "[ad_conn package_url]?[export_vars -url { { creation_user {[ad_conn user_id]} } }]"
 }
-if { [ad_permission_p $package_id admin] } {
-    multirow append links "Admin" "[ad_conn package_url]admin/"
-}
+# Commenting out Admin link as the admin pages haven't been written yet
+#if { [ad_permission_p $package_id admin] } {
+#    multirow append links "Admin" "[ad_conn package_url]admin/"
+#}
 
 ad_return_template
