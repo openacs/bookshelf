@@ -184,7 +184,7 @@ namespace eval bookshelf::book {
                        acs_objects o on (o.object_id = b.book_id) join
                        cc_users u on (u.user_id = o.creation_user)
                 where  book_no = :book_no
-                and    package_id = :package_id
+                and    b.package_id = :package_id
             } -column_array row
         }
     }

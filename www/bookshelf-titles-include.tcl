@@ -27,7 +27,7 @@ db_multirow -extend { view_url } book books {
     from   bookshelf_books b join 
            acs_objects o on (o.object_id = b.book_id) join
            cc_users u on (u.user_id = o.creation_user)
-    where  package_id = :package_id
+    where  b.package_id = :package_id
     and    publish_status = 'publish'
     order  by bookshelf_book__read_status_sort_order(b.read_status), o.creation_date desc
 } {

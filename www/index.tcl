@@ -29,7 +29,7 @@ db_1row instance_name {
 set page_title $instance_name
 
 set human_readable_filter "All books"
-set where_clauses [list "package_id = :package_id"]
+set where_clauses [list "b.package_id = :package_id"]
 set filters_p 0
 
 if { [info exists read_status] } {
