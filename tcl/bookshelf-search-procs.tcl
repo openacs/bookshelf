@@ -16,23 +16,31 @@ ad_proc -private bookshelf::book::search::datasource { book_id } {
 
     @author Jeff Davis davis@xarg.net
 } {
+    if {[db_0or1row get {select package_id, book_no from bookshelf_books where book_id = :book_id}]} {
+        set base [apm_package_url_from_id $package_id]
+    } else { 
+        set base {}
+    }
+    set full "[ad_url]$base"
 
-    bookshelf::book::get -book_id $book_id -array b
+    bookshelf::book::get -book_id $book_id -array book
+    set title "$book(book_title) by $book(book_author)"
 
-    set title "$b(book_title) by $b(book_author)"
-    set content "$b(book_title) by $b(book_author)
-$b(main_entry)
-$b(additional_entry)
-$b(excerpt)
-reviewed $b(creation_date_pretty)
-ISBN $b(isbn)
-"
+    set body [template::adp_include /packages/bookshelf/lib/one-book [list & "book" base $base style feed]]
+
     return [list object_id $book_id \
                 title $title \
-                content $content \
+                content $body \
                 keywords {} \
                 storage_type text \
-                mime text/plain ]
+                mime text/html \
+                syndication [list link ${full}book-view?book_no=$book(book_no) \
+                                 description "Book review" \
+                                 guid "[ad_url]/o/$book_id" \
+                                 category {book review} \
+                                 pubDate $book(creation_date) \
+                                 author "$book(creation_user_first_names) $book(creation_user_last_name)" ] \
+               ]
 }
 
 ad_proc -private bookshelf::book::search::url { book_id } {
