@@ -7,13 +7,13 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="1.0" url="http://openacs.org/repository/download/apm/bookshelf-1.0.apm">
+    <version name="1.1" url="http://openacs.org/repository/download/apm/bookshelf-1.1.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Share your bookshelf with others.</summary>
         <release-date>2005-04-03</release-date>
         <description format="text/html">Store commentary on books with an interface to amazon to retrieve thumbnails and other book data</description>
 
-        <provides url="bookshelf" version="1.0"/>
+        <provides url="bookshelf" version="1.1"/>
 
         <callbacks>
         </callbacks>

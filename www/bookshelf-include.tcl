@@ -17,13 +17,14 @@ if { [exists_and_not_null limit] } {
     set limit_clause ""
 }
 
-db_multirow -extend { view_url } book books "
+db_multirow -extend { view_url main_entry_html } book books "
     select b.book_id,
            b.book_no,
            b.isbn,
            b.book_author,
            b.book_title,
            b.main_entry,
+           b.main_entry_mime_type,
            b.additional_entry,
            b.excerpt,
            b.publish_status,
@@ -47,5 +48,8 @@ db_multirow -extend { view_url } book books "
     }
     set read_status_pretty [string totitle $read_status_pretty]
     set view_url "book-view?[export_vars { book_no }]"
+
+    set richtext [list $main_entry $main_entry_mime_type]
+    set main_entry_html [template::util::richtext::get_property html_value $richtext]
 }
 
