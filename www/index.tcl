@@ -97,7 +97,7 @@ set sql "
 
 db_multirow -extend { view_url edit_url } book books $sql {
     if { [empty_string_p $excerpt] } {
-        set excerpt [string_truncate -len 300 $main_entry]
+        set excerpt [string_truncate -len 300 -- $main_entry]
     }
     set read_status_pretty [string totitle $read_status_pretty]
     set view_url "book-view?[export_vars { book_no }]"

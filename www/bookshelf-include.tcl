@@ -34,7 +34,7 @@ db_multirow -extend { view_url } book books {
     order  by bookshelf_book__read_status_sort_order(b.read_status) desc, o.creation_date desc
 } {
     if { [empty_string_p $excerpt] } {
-        set excerpt [string_truncate -len 300 $main_entry]
+        set excerpt [string_truncate -len 300 -- $main_entry]
     }
     set read_status_pretty [string totitle $read_status_pretty]
     set view_url "book-view?[export_vars { book_no }]"
