@@ -62,7 +62,7 @@ begin
         v_creation_date,
         p_creation_user,
         p_creation_ip,
-        coalesce(p_context_id, p_package_id),
+        p_package_id,
         ''t'',
         p_book_title,
         p_package_id
