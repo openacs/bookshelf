@@ -26,7 +26,7 @@ namespace eval bookshelf::amazon {
         }
         return $url
     }
-    
+
     ad_proc get_image_info {
         -array:required
         isbn
@@ -38,37 +38,36 @@ namespace eval bookshelf::amazon {
         upvar $array row
 
         # Download image to temp file
-        
+
         set filename "[ns_mktemp "/tmp/gifXXXXXX"].gif"
         set url [get_image_url $isbn]
         set httpopen_result [ns_httpopen GET $url]
-        
-        set readfd [lindex $httpopen_result 0]
-        set writefd [lindex $httpopen_result 1]
+
+        lassign $httpopen_result readfd writefd
         close $writefd
-        
+
         set tmpfilefd [open $filename w]
-        fconfigure $tmpfilefd -translation binary 
-        
+        fconfigure $tmpfilefd -translation binary
+
         fcopy $readfd $tmpfilefd
-        
+
         close $tmpfilefd
         close $readfd
-        
+
         # Figure out the size
-        
+
         # Hmm. it's actually a JPEG, though it's named GIF
         if { [catch {
             set gifsize [ns_jpegsize $filename]
         }] } {
             # Oops, and then sometimes it *is* a GIF ...
             set gifsize [ns_gifsize $filename]
-        } 
-        
+        }
+
         # Delete tmp file
         file delete $filename
-        
-        
+
+
         set row(image_width) [lindex $gifsize 0]
         set row(image_height) [lindex $gifsize 1]
     }
@@ -84,7 +83,7 @@ namespace eval bookshelf::amazon {
         upvar $array row
 
         # Grab book info page from Amazon
-        
+
         set url [get_book_url $isbn]
 
         set amazon_info_page [ns_httpget $url]
@@ -94,13 +93,13 @@ namespace eval bookshelf::amazon {
         } else {
             set row(book_title) [string trim $title]
         }
-        
-        
+
+
         if { ![regexp {by <a href="/exec/obidos/search-handle-url/index=books&field-author=[^"]*">([^<]+)</a>} $amazon_info_page match author] } {
             set row(book_author) "-"
         } else {
             set row(book_author) [string trim $author]
         }
-        
+
     }
 }
